@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_hospital_inventory_form" model="ir.ui.view">
+        <field name="name">hospital.inventory.form</field>
+        <field name="model">hospital.inventory</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_product" type="object"
+                                class="oe_stat_button" icon="fa-cube"
+                                string="Product"/>
+                        <button name="action_view_stock" type="object"
+                                class="oe_stat_button" icon="fa-exchange"
+                                string="Stock Moves"/>
+                        <button name="action_open_inventory_adjustment"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-pencil"
+                                string="Adjust Stock"/>
+                    </div>
+
+                    <div class="oe_title">
+                        <h1><field name="product_id"/></h1>
+                    </div>
+
+                    <group>
+                        <group string="Product Info">
+                            <field name="product_id"/>
+                            <field name="category"/>
+                            <field name="supplier"/>
+                            <field name="location_id"/>
+                        </group>
+                        <group string="Stock Info">
+                            <field name="quantity_on_hand" readonly="1"/>
+                        </group>
+                    </group>
+
+                    <group string="Description">
+                        <field name="description" nolabel="1"/>
+                    </group>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_hospital_inventory_list" model="ir.ui.view">
+        <field name="name">hospital.inventory.list</field>
+        <field name="model">hospital.inventory</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="product_id"/>
+                <field name="category"/>
+                <field name="quantity_on_hand"/>
+                <field name="supplier"/>
+                <field name="location_id"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_hospital_inventory" model="ir.actions.act_window">
+        <field name="name">Medical Inventory</field>
+        <field name="res_model">hospital.inventory</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+</odoo>

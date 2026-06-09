@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_prescription_template">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.external_layout">
+                    <div class="page">
+
+                        <!-- Header -->
+                        <div class="row mb-4">
+                            <div class="col-6">
+                                <h2>🏥 Hospital Management</h2>
+                                <h4>Medical Prescription</h4>
+                            </div>
+                            <div class="col-6 text-end">
+                                <strong>Ref:</strong> <t t-esc="doc.name"/><br/>
+                                <strong>Date:</strong> <t t-esc="doc.date"/><br/>
+                            </div>
+                        </div>
+
+                        <hr/>
+
+                        <!-- Patient & Doctor Info -->
+                        <div class="row mb-4">
+                            <div class="col-6">
+                                <h5>Patient Information</h5>
+                                <table class="table table-sm">
+                                    <tr>
+                                        <td><strong>Name:</strong></td>
+                                        <td><t t-esc="doc.patient_id.name"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Ref:</strong></td>
+                                        <td><t t-esc="doc.patient_id.ref"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Age:</strong></td>
+                                        <td><t t-esc="doc.patient_id.age"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Gender:</strong></td>
+                                        <td><t t-esc="doc.patient_id.gender"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Blood Group:</strong></td>
+                                        <td><t t-esc="doc.patient_id.blood_group"/></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="col-6">
+                                <h5>Doctor Information</h5>
+                                <table class="table table-sm">
+                                    <tr>
+                                        <td><strong>Name:</strong></td>
+                                        <td><t t-esc="doc.doctor_id.name"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Specialization:</strong></td>
+                                        <td><t t-esc="doc.doctor_id.specialization"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Degree:</strong></td>
+                                        <td><t t-esc="doc.doctor_id.degree"/></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                        <hr/>
+
+                        <!-- Medicines Table -->
+                        <h5>Prescribed Medicines</h5>
+                        <table class="table table-bordered">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Medicine</th>
+                                    <th>Dosage</th>
+                                    <th>Frequency</th>
+                                    <th>Duration</th>
+                                    <th>Notes</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="doc.prescription_line_ids" t-as="line">
+                                    <tr>
+                                        <td><t t-esc="line_index + 1"/></td>
+                                        <td><t t-esc="line.medicine_name"/></td>
+                                        <td><t t-esc="line.dosage"/></td>
+                                        <td><t t-esc="line.frequency"/></td>
+                                        <td><t t-esc="line.duration"/></td>
+                                        <td><t t-esc="line.notes"/></td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+
+                        <!-- Doctor Notes -->
+                        <t t-if="doc.notes">
+                            <h5>Doctor Notes</h5>
+                            <p><t t-esc="doc.notes"/></p>
+                        </t>
+
+                        <hr/>
+
+                        <!-- Signature -->
+                        <div class="row mt-5">
+                            <div class="col-6">
+                                <p>_______________________</p>
+                                <p><strong>Doctor Signature</strong></p>
+                                <p><t t-esc="doc.doctor_id.name"/></p>
+                            </div>
+                            <div class="col-6 text-end">
+                                <p>_______________________</p>
+                                <p><strong>Patient Signature</strong></p>
+                            </div>
+                        </div>
+
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

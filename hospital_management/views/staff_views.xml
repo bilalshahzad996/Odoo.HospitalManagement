@@ -1,0 +1,82 @@
+<odoo>
+    <record id="view_hospital_staff_form" model="ir.ui.view">
+        <field name="name">hospital.staff.form</field>
+        <field name="model">hospital.staff</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_active" type="object" string="Set Active" invisible="state == 'active'" class="btn-success"/>
+                    <button name="action_on_leave" type="object" string="On Leave" invisible="state == 'on_leave'" class="btn-warning"/>
+                    <button name="action_resigned" type="object" string="Resigned" invisible="state == 'resigned'"/>
+                    <button name="action_terminated" type="object" string="Terminated" invisible="state == 'terminated'" class="btn-danger"/>
+                    <field name="state" widget="statusbar" statusbar_visible="active,on_leave,resigned,terminated"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_attendance" type="object" class="oe_stat_button" icon="fa-clock-o">
+                            <field name="attendance_count" widget="statinfo" string="Attendance"/>
+                        </button>
+                        <button name="action_view_leaves" type="object" class="oe_stat_button" icon="fa-calendar-times-o">
+                            <field name="leave_count" widget="statinfo" string="Leaves"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1><field name="name" placeholder="Full Name"/></h1>
+                    </div>
+                    <group>
+                        <group string="Personal Info">
+                            <field name="ref"/>
+                            <field name="job_type"/>
+                            <field name="gender"/>
+                            <field name="date_of_birth"/>
+                            <field name="qualification"/>
+                            <field name="experience_years"/>
+                        </group>
+                        <group string="Work Info">
+                            <field name="department_id"/>
+                            <field name="shift_id"/>
+                            <field name="date_joining"/>
+                            <field name="salary"/>
+                        </group>
+                    </group>
+                    <group string="Contact Info">
+                        <group>
+                            <field name="phone"/>
+                            <field name="email"/>
+                        </group>
+                        <group>
+                            <field name="address"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Notes">
+                            <field name="notes"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+    <record id="view_hospital_staff_list" model="ir.ui.view">
+        <field name="name">hospital.staff.list</field>
+        <field name="model">hospital.staff</field>
+        <field name="arch" type="xml">
+            <list decoration-success="state == 'active'" decoration-warning="state == 'on_leave'" decoration-muted="state == 'resigned'" decoration-danger="state == 'terminated'">
+                <field name="ref"/>
+                <field name="name"/>
+                <field name="job_type"/>
+                <field name="department_id"/>
+                <field name="shift_id"/>
+                <field name="phone"/>
+                <field name="date_joining"/>
+                <field name="state" widget="badge" decoration-success="state == 'active'" decoration-warning="state == 'on_leave'" decoration-danger="state == 'terminated'"/>
+            </list>
+        </field>
+    </record>
+    <record id="action_hospital_staff" model="ir.actions.act_window">
+        <field name="name">Staff</field>
+        <field name="res_model">hospital.staff</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>
