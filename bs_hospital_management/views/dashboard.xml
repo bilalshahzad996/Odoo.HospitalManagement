@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- ── Patient Views ──────────────────────────────────── -->
+    <record id="view_hospital_patient_graph" model="ir.ui.view">
+        <field name="name">hospital.patient.graph</field>
+        <field name="model">hospital.patient</field>
+        <field name="arch" type="xml">
+            <graph string="Patients" type="bar" sample="1">
+                <field name="gender" type="row"/>
+                <field name="state" type="col"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="view_hospital_patient_pivot" model="ir.ui.view">
+        <field name="name">hospital.patient.pivot</field>
+        <field name="model">hospital.patient</field>
+        <field name="arch" type="xml">
+            <pivot string="Patients" sample="1">
+                <field name="gender" type="row"/>
+                <field name="state" type="col"/>
+                <field name="age" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <!-- ── Appointment Views ──────────────────────────────── -->
+    <record id="view_hospital_appointment_graph" model="ir.ui.view">
+        <field name="name">hospital.appointment.graph</field>
+        <field name="model">hospital.appointment</field>
+        <field name="arch" type="xml">
+            <graph string="Appointments" type="bar" sample="1">
+                <field name="doctor_id" type="row"/>
+                <field name="state" type="col"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="view_hospital_appointment_pivot" model="ir.ui.view">
+        <field name="name">hospital.appointment.pivot</field>
+        <field name="model">hospital.appointment</field>
+        <field name="arch" type="xml">
+            <pivot string="Appointments" sample="1">
+                <field name="doctor_id" type="row"/>
+                <field name="state" type="col"/>
+            </pivot>
+        </field>
+    </record>
+
+    <!-- ── Bill Views ─────────────────────────────────────── -->
+    <record id="view_hospital_bill_graph" model="ir.ui.view">
+        <field name="name">hospital.bill.graph</field>
+        <field name="model">hospital.bill</field>
+        <field name="arch" type="xml">
+            <graph string="Billing" type="bar" sample="1">
+                <field name="state" type="row"/>
+                <field name="total_amount" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="view_hospital_bill_pivot" model="ir.ui.view">
+        <field name="name">hospital.bill.pivot</field>
+        <field name="model">hospital.bill</field>
+        <field name="arch" type="xml">
+            <pivot string="Billing" sample="1">
+                <field name="patient_id" type="row"/>
+                <field name="state" type="col"/>
+                <field name="total_amount" type="measure"/>
+                <field name="amount_paid" type="measure"/>
+                <field name="amount_due" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <!-- ── Attendance Views ───────────────────────────────── -->
+    <record id="view_hospital_attendance_graph" model="ir.ui.view">
+        <field name="name">hospital.attendance.graph</field>
+        <field name="model">hospital.attendance</field>
+        <field name="arch" type="xml">
+            <graph string="Attendance" type="bar" sample="1">
+                <field name="status" type="row"/>
+                <field name="worked_hours" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="view_hospital_attendance_pivot" model="ir.ui.view">
+        <field name="name">hospital.attendance.pivot</field>
+        <field name="model">hospital.attendance</field>
+        <field name="arch" type="xml">
+            <pivot string="Attendance" sample="1">
+                <field name="staff_id" type="row"/>
+                <field name="status" type="col"/>
+                <field name="worked_hours" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <!-- ── Inventory Views ────────────────────────────────── -->
+    <record id="view_hospital_inventory_graph" model="ir.ui.view">
+        <field name="name">hospital.inventory.graph</field>
+        <field name="model">hospital.inventory</field>
+        <field name="arch" type="xml">
+            <graph string="Inventory" type="bar" sample="1">
+                <field name="category" type="row"/>
+                <field name="quantity_on_hand" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="view_hospital_inventory_pivot" model="ir.ui.view">
+        <field name="name">hospital.inventory.pivot</field>
+        <field name="model">hospital.inventory</field>
+        <field name="arch" type="xml">
+            <pivot string="Inventory" sample="1">
+                <field name="category" type="row"/>
+                <field name="quantity_on_hand" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <!-- ── Staff Views ────────────────────────────────────── -->
+    <record id="view_hospital_staff_graph" model="ir.ui.view">
+        <field name="name">hospital.staff.graph</field>
+        <field name="model">hospital.staff</field>
+        <field name="arch" type="xml">
+            <graph string="Staff" type="bar" sample="1">
+                <field name="job_type" type="row"/>
+                <field name="state" type="col"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="view_hospital_staff_pivot" model="ir.ui.view">
+        <field name="name">hospital.staff.pivot</field>
+        <field name="model">hospital.staff</field>
+        <field name="arch" type="xml">
+            <pivot string="Staff" sample="1">
+                <field name="department_id" type="row"/>
+                <field name="job_type" type="col"/>
+            </pivot>
+        </field>
+    </record>
+
+    <!-- ── Dashboard Actions ──────────────────────────────── -->
+    <record id="action_hospital_patient_dashboard" model="ir.actions.act_window">
+        <field name="name">Patients Overview</field>
+        <field name="res_model">hospital.patient</field>
+        <field name="view_mode">graph,pivot,list</field>
+    </record>
+
+    <record id="action_hospital_appointment_dashboard" model="ir.actions.act_window">
+        <field name="name">Appointments Overview</field>
+        <field name="res_model">hospital.appointment</field>
+        <field name="view_mode">graph,pivot,list</field>
+    </record>
+
+    <record id="action_hospital_bill_dashboard" model="ir.actions.act_window">
+        <field name="name">Billing Overview</field>
+        <field name="res_model">hospital.bill</field>
+        <field name="view_mode">graph,pivot,list</field>
+    </record>
+
+    <record id="action_hospital_attendance_dashboard" model="ir.actions.act_window">
+        <field name="name">Attendance Overview</field>
+        <field name="res_model">hospital.attendance</field>
+        <field name="view_mode">graph,pivot,list</field>
+    </record>
+
+    <record id="action_hospital_inventory_dashboard" model="ir.actions.act_window">
+        <field name="name">Inventory Overview</field>
+        <field name="res_model">hospital.inventory</field>
+        <field name="view_mode">graph,pivot,list</field>
+    </record>
+
+    <record id="action_hospital_staff_dashboard" model="ir.actions.act_window">
+        <field name="name">Staff Overview</field>
+        <field name="res_model">hospital.staff</field>
+        <field name="view_mode">graph,pivot,list</field>
+    </record>
+
+    </odoo>
