@@ -3,11 +3,11 @@
     'version': '19.0.1.0.0',
     'summary': 'Manage Patients, Doctors, and Appointments',
     'description': 'Full Hospital Management System - Patients, Doctors, Appointments',
-    'author': 'Bilal Shahzad',
+    'author': 'DevFlow',
     'price': '49.99',
     'currency': 'USD',
     'category': 'Healthcare',
-    'maintainer': 'Bilal Shahzad',
+    'maintainer': 'DevFlow',
     'depends': ['base', 'mail', 'portal', 'sale', 'stock', 'account', 'appointment'],
     'data': [
         'data/sequence.xml',
