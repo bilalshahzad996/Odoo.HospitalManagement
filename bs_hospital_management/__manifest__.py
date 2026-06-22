@@ -4,7 +4,7 @@
     'summary': 'Manage Patients, Doctors, and Appointments',
     'description': 'Full Hospital Management System - Patients, Doctors, Appointments',
     'author': 'Bilal Shahzad',
-    'price': '50.0',
+    'price': '49.99',
     'currency': 'USD',
     'category': 'Healthcare',
     'maintainer': 'Bilal Shahzad',
