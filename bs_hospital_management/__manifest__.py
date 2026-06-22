@@ -4,9 +4,10 @@
     'summary': 'Manage Patients, Doctors, and Appointments',
     'description': 'Full Hospital Management System - Patients, Doctors, Appointments',
     'author': 'Bilal Shahzad',
-    'Price': '50.0',
-    'Currency': 'USD',
+    'price': '50.0',
+    'currency': 'USD',
     'category': 'Healthcare',
+    'maintainer': 'Bilal Shahzad',
     'depends': ['base', 'mail', 'portal', 'sale', 'stock', 'account', 'appointment'],
     'data': [
         'data/sequence.xml',
