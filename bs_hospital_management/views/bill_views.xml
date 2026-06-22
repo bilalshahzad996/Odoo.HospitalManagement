@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_hospital_bill_form" model="ir.ui.view">
+        <field name="name">hospital.bill.form</field>
+        <field name="model">hospital.bill</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_confirm" type="object"
+                            string="Confirm"
+                            invisible="state != 'draft'"
+                            class="btn-primary"/>
+                    <button name="action_pay" type="object"
+                            string="Mark as Paid"
+                            invisible="state != 'confirmed'"
+                            class="btn-success"/>
+                    <button name="action_print_receipt" type="object"
+                            string="Print Receipt"
+                            invisible="state == 'draft'"
+                            class="btn-info"/>
+                    <button name="action_cancel" type="object"
+                            string="Cancel"
+                            invisible="state == 'cancelled'"/>
+                    <button name="action_draft" type="object"
+                            string="Reset to Draft"
+                            invisible="state == 'draft'"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="draft,confirmed,paid"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_sale_order"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-shopping-cart"
+                                invisible="sale_order_id == False">
+                            <field name="sale_order_count"
+                                   widget="statinfo"
+                                   string="Sale Order"/>
+                        </button>
+                        <button name="action_view_invoice"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-pencil-square-o"
+                                invisible="invoice_id == False">
+                            <field name="invoice_count"
+                                   widget="statinfo"
+                                   string="Invoice"/>
+                        </button>
+                    </div>
+
+                    <div class="oe_title">
+                        <h1><field name="name" readonly="1"/></h1>
+                    </div>
+
+                    <group>
+                        <group string="Patient Info">
+                            <field name="patient_id"/>
+                            <field name="doctor_id"/>
+                            <field name="appointment_id"
+                                   domain="[('patient_id','=',patient_id)]"/>
+                        </group>
+                        <group string="Bill Info">
+                            <field name="bill_date"/>
+                            <field name="due_date"/>
+                            <field name="payment_method"/>
+                            <field name="sale_order_id" readonly="1"/>
+                            <field name="invoice_id" readonly="1"/>
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <!-- Services Tab -->
+                        <page string="Services">
+                            <field name="bill_line_ids" readonly="state != 'draft'">
+                                <list editable="bottom">
+                                    <field name="service_id"/>
+                                    <field name="description"/>
+                                    <field name="quantity"/>
+                                    <field name="unit_price"/>
+                                    <field name="subtotal" readonly="1"/>
+                                </list>
+                            </field>
+                        </page>
+
+                        <!-- Products Tab -->
+                        <page string="Products (From Inventory)">
+                            <field name="bill_product_ids" readonly="state != 'draft'">
+                                <list editable="bottom">
+                                    <field name="product_id"/>
+                                    <field name="description"/>
+                                    <field name="qty_available" readonly="1"
+                                           decoration-danger="qty_available == 0"
+                                           decoration-warning="qty_available &lt; 5"/>
+                                    <field name="quantity"/>
+                                    <field name="unit_price"/>
+                                    <field name="subtotal" readonly="1"/>
+                                </list>
+                            </field>
+                            <div class="alert alert-info">
+                                Products will be deducted from inventory when bill is confirmed.
+                            </div>
+                        </page>
+
+                        <page string="Notes">
+                            <field name="notes"/>
+                        </page>
+                    </notebook>
+
+                    <!-- Totals -->
+                    <group class="oe_subtotal_footer">
+                        <group/>
+                        <group>
+                            <field name="subtotal" readonly="1"/>
+                            <field name="discount"/>
+                            <field name="tax"/>
+                            <field name="total_amount" readonly="1"/>
+                            <field name="amount_paid"/>
+                            <field name="amount_due" readonly="1"
+                                   decoration-danger="amount_due > 0"
+                                   decoration-success="amount_due == 0"/>
+                        </group>
+                    </group>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_hospital_bill_list" model="ir.ui.view">
+        <field name="name">hospital.bill.list</field>
+        <field name="model">hospital.bill</field>
+        <field name="arch" type="xml">
+            <list decoration-success="state == 'paid'"
+                  decoration-warning="state == 'confirmed'"
+                  decoration-muted="state == 'cancelled'">
+                <field name="name"/>
+                <field name="patient_id"/>
+                <field name="doctor_id"/>
+                <field name="bill_date"/>
+                <field name="total_amount"/>
+                <field name="amount_paid"/>
+                <field name="amount_due"/>
+                <field name="payment_method"/>
+                <field name="sale_order_id"/>
+                <field name="invoice_id"/>
+                <field name="state" widget="badge"
+                       decoration-success="state == 'paid'"
+                       decoration-warning="state == 'confirmed'"
+                       decoration-danger="state == 'cancelled'"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_hospital_bill" model="ir.actions.act_window">
+        <field name="name">Bills</field>
+        <field name="res_model">hospital.bill</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <record id="action_hospital_bill_paid" model="ir.actions.act_window">
+        <field name="name">Paid Bills</field>
+        <field name="res_model">hospital.bill</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[("state","=","paid")]</field>
+    </record>
+
+    <record id="action_hospital_bill_pending" model="ir.actions.act_window">
+        <field name="name">Pending Bills</field>
+        <field name="res_model">hospital.bill</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[("state","in",["draft","confirmed"])]</field>
+    </record>
+</odoo>

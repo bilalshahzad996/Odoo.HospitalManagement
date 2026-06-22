@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Root Menu WITH web_icon to show on Home Screen -->
+    <menuitem id="menu_hospital_root"
+          name="Hospital Management"
+          web_icon="hospital_management,static/description/icon.png"
+          sequence="10"/>
+
+   <!-- Dashboard -->
+    <menuitem id="menu_hospital_dashboard_root" name="Dashboard"
+              parent="menu_hospital_root" sequence="1"/>
+    <menuitem id="menu_hospital_patient_dashboard" name="Patients"
+              parent="menu_hospital_dashboard_root"
+              action="action_hospital_patient_dashboard" sequence="1"/>
+    <menuitem id="menu_hospital_appointment_dashboard" name="Appointments"
+              parent="menu_hospital_dashboard_root"
+              action="action_hospital_appointment_dashboard" sequence="2"/>
+    <menuitem id="menu_hospital_bill_dashboard" name="Billing"
+              parent="menu_hospital_dashboard_root"
+              action="action_hospital_bill_dashboard" sequence="3"/>
+    <menuitem id="menu_hospital_attendance_dashboard" name="Attendance"
+              parent="menu_hospital_dashboard_root"
+              action="action_hospital_attendance_dashboard" sequence="4"/>
+<!--    <menuitem id="menu_hospital_inventory_dashboard" name="Inventory"-->
+<!--              parent="menu_hospital_dashboard_root"-->
+<!--              action="action_hospital_inventory_dashboard" sequence="5"/>-->
+    <menuitem id="menu_hospital_staff_dashboard" name="Staff"
+              parent="menu_hospital_dashboard_root"
+              action="action_hospital_staff_dashboard" sequence="6"/>
+
+        <!-- OPD Management -->
+    <menuitem id="menu_hospital_opd_root" name="OPD Management"
+              parent="menu_hospital_root" sequence="2"/>
+   <menuitem id="menu_hospital_patients" name="Patients"
+              parent="menu_hospital_opd_root"
+              action="action_hospital_patient" sequence="1"/>
+    <menuitem id="menu_hospital_appointments" name="Appointments"
+              parent="menu_hospital_opd_root"
+              action="action_hospital_appointment" sequence="2"/>
+    <menuitem id="menu_hospital_doctors" name="Doctors"
+              parent="menu_hospital_opd_root"
+              action="action_hospital_doctor" sequence="3"/>
+    <menuitem id="menu_hospital_prescriptions" name="Prescriptions"
+              parent="menu_hospital_opd_root"
+              action="action_hospital_prescription" sequence="4"/>
+
+     <!-- Billing -->
+    <menuitem id="menu_hospital_billing_root" name="Billing"
+              parent="menu_hospital_root" sequence="5"/>
+    <menuitem id="menu_hospital_bills" name="All Bills"
+              parent="menu_hospital_billing_root" action="action_hospital_bill" sequence="1"/>
+    <menuitem id="menu_hospital_bills_pending" name="Pending Bills"
+              parent="menu_hospital_billing_root" action="action_hospital_bill_pending" sequence="2"/>
+    <menuitem id="menu_hospital_bills_paid" name="Paid Bills"
+              parent="menu_hospital_billing_root" action="action_hospital_bill_paid" sequence="3"/>
+    <menuitem id="menu_hospital_services" name="Services"
+              parent="menu_hospital_billing_root" action="action_hospital_service" sequence="4"/>
+
+    <!-- Inventory (Inventory + Low Stock under one button) -->
+    <menuitem id="menu_hospital_inventory_root" name="Inventory"
+              parent="menu_hospital_root"
+              action="action_hospital_inventory" sequence="6"/>
+
+<!--    <menuitem id="menu_hospital_inventory" name="All Items"-->
+<!--              parent="menu_hospital_inventory_root"-->
+<!--              action="action_hospital_inventory" sequence="1"/>-->
+<!--    <menuitem id="menu_hospital_low_stock" name="⚠️ Low Stock Alerts"-->
+<!--              parent="menu_hospital_inventory_root"-->
+<!--              action="action_hospital_inventory_low" sequence="2"/>-->
+
+
+    <menuitem id="menu_hospital_staff_root" name="Staff Management"
+              parent="menu_hospital_root" sequence="7"/>
+
+    <menuitem id="menu_hospital_staff" name="All Staff"
+              parent="menu_hospital_staff_root" action="action_hospital_staff" sequence="1"/>
+
+    <menuitem id="menu_hospital_departments" name="Departments"
+              parent="menu_hospital_staff_root" action="action_hospital_department" sequence="2"/>
+
+    <menuitem id="menu_hospital_shifts" name="Shifts"
+              parent="menu_hospital_staff_root" action="action_hospital_shift" sequence="3"/>
+
+    <!-- HR (Attendance + Leave under one button) -->
+    <menuitem id="menu_hospital_hr_root" name="HR Management"
+              parent="menu_hospital_root" sequence="8"/>
+    <menuitem id="menu_hospital_attendance" name="Attendance Records"
+              parent="menu_hospital_hr_root"
+              action="action_hospital_attendance" sequence="1"/>
+    <menuitem id="menu_hospital_leave" name="Leave Requests"
+              parent="menu_hospital_hr_root"
+              action="action_hospital_leave" sequence="2"/>
+    <menuitem id="menu_hospital_leave_pending" name="Pending Approvals"
+              parent="menu_hospital_hr_root"
+              action="action_hospital_leave_pending" sequence="3"/>
+
+</odoo>
