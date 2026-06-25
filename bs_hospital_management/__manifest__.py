@@ -33,7 +33,7 @@
         'report/prescription_report_action.xml',
         'security/ir.model.access.csv',
     ],
-    # 'images': ['static/description/icon.png'],
+    'images': ['static/description/icon2.png'],
     'images': ['static/description/banner.png'],
     'installable': True,
     'application': True,
