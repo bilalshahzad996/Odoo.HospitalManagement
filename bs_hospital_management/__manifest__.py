@@ -34,7 +34,7 @@
         'security/ir.model.access.csv',
     ],
     # 'images': ['static/description/icon.png'],
-    'images': ['static/description/banner.png'],
+    'images': ['static/description/icon2.png'],
     'installable': True,
     'application': True,
     'auto_install': False,
